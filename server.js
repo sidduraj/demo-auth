@@ -20,8 +20,7 @@ app.use(session({
     store: MongoStore.create({mongoUrl: MONGO_URL })
 }));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');	
+app.set('views', path.join(__dirname, 'views'));	
   
 // this is used to enable server to read json 
 app.use(bodyParser.json());

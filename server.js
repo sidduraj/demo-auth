@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo');
-var ejs = require('ejs');
 const path = require('path');
 
 
@@ -52,21 +51,18 @@ async function main() {
 //routes
 
 app.get('/signup',(req, res)=>{
-    return res.render('signup.ejs');
+    return  res.sendFile(path.join(__dirname+'/views/signup.html'));
 })
 
 app.post('/signup',(req,res)=>{
-    console.log(req.body);
-
     const user = new User(req.body);
     user.save(function(err, _){
         if(err)
             console.log(err);
         else
             console.log('Success');
+            res.send('Account created successfully!')
     });
-
-    res.send('asdfasd')
 })
 
 
@@ -77,7 +73,7 @@ app.get('/login',(req, res)=>{
             if(data){
                 return res.redirect('/')
             } else {
-                return res.render('login.ejs');
+                return  res.sendFile(path.join(__dirname+'/views/signup.html'));
             }
         }
     )
@@ -93,7 +89,6 @@ app.post('/login',(req,res)=>{
 				req.session.userId = data._id;
 				console.log(req.session.userId);
 				return res.send({"Success":"Success!"});
-                //return res.redirect('/');
 				
 			}else{
 				return res.send({"Success":"Wrong password!"});

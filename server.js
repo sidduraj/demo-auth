@@ -72,7 +72,7 @@ app.get('/login',(req, res)=>{
             if(data){
                 return res.redirect('/')
             } else {
-                return  res.sendFile(path.join(__dirname+'/views/signup.html'));
+                return  res.sendFile(path.join(__dirname+'/views/login.html'));
             }
         }
     )

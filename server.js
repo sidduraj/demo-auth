@@ -76,7 +76,6 @@ app.get('/login',(req, res)=>{
         function(err,data){
             if(data){
                 return res.redirect('/')
-                //return res.send('login successfull go <a href="/">home</a>')
             } else {
                 return res.render('login.ejs');
             }

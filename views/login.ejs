@@ -22,8 +22,14 @@
 					dataType: "json",
 					success: function(response){
 						$('#form1')[0].reset();
-						//redirect to home on success
-						window.location.href = '/'
+						document.getElementById("check").innerHTML=response.Success;
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="Success!") {
+         						//redirect to home on success
+								window.location.href = '/'
+         					};
          				},
          				error: function() {
          				}

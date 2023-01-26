@@ -9,7 +9,7 @@ const path = require('path');
 
 
 const app = express()
-const port = 3000
+const port = 3002
 
 
 const MONGO_URL = "mongodb+srv://siddu:Siddu%40123@cluster0.gjp169q.mongodb.net/DemoAuth?retryWrites=true&w=majority"
@@ -50,9 +50,6 @@ async function main() {
 }
 
 //routes
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
 
 app.get('/signup',(req, res)=>{
     return res.render('signup.ejs');
@@ -78,7 +75,7 @@ app.get('/login',(req, res)=>{
         {_id:req.session.userId},
         function(err,data){
             if(data){
-                res.redirect('/home')
+                res.redirect('/')
             } else {
                 return res.render('login.ejs');
             }
@@ -96,7 +93,7 @@ app.post('/login',(req,res)=>{
 				req.session.userId = data._id;
 				console.log(req.session.userId);
 				res.send({"Success":"Success!"});
-                res.redirect('/home');
+                //res.redirect('/');
 				
 			}else{
 				res.send({"Success":"Wrong password!"});
@@ -116,12 +113,15 @@ app.listen(port, () => {
 
 
 
-app.get('/home',(req, res)=>{
+app.get('/',(req, res)=>{
     User.findOne(
         {_id:req.session.userId},
         function(err,data){
             if(data){
                 res.send(data.userName)
-            }}
+            } else {
+                res.redirect('/login');
+            }
+        }
     )
 })

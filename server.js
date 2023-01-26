@@ -75,7 +75,7 @@ app.get('/login',(req, res)=>{
         {_id:req.session.userId},
         function(err,data){
             if(data){
-                return res.redirect('/');
+                return res.redirect('/')
                 //return res.send('login successfull go <a href="/">home</a>')
             } else {
                 return res.render('login.ejs');
@@ -93,8 +93,8 @@ app.post('/login',(req,res)=>{
 				//console.log("Done Login");
 				req.session.userId = data._id;
 				console.log(req.session.userId);
-				//return res.send({"Success":"Success!"});
-                return res.redirect('/');
+				return res.send({"Success":"Success!"});
+                //return res.redirect('/');
 				
 			}else{
 				return res.send({"Success":"Wrong password!"});

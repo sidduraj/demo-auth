@@ -60,7 +60,8 @@ app.post('/signup',(req,res)=>{
             console.log(err);
         else
             console.log('Success');
-            res.send('Account created successfully!')
+            return res.send({"Success":"Account created successfully!"});
+
     });
 })
 

@@ -1,27 +1,37 @@
-# demo-auth
-This is a Simple User Registration &amp; Login systems app
-This is a Node.js web application that uses the Express framework to handle routing, Mongoose for interacting with a MongoDB database, and EJS for rendering views. The app allows users to sign up and log in, and once logged in, a user will be able to see their username on the homepage.
-Here is a brief overview of what the code is doing:
+Express.js, MongoDB, and Mongoose Authentication
+This is an example of how to create a simple authentication system using Express.js, MongoDB, and Mongoose. This example uses an express server to handle the requests and MongoDB as the database. The Mongoose is used as the Object Document Mapping(ODM) library for MongoDB.
 
-The code starts by importing various modules such as express, body-parser, mongoose, express-session, connect-mongo, ejs and path.
+Prerequisites
 
-Next, it creates an instance of the Express app, and sets the server to listen on port 3000.
+ Node.js and npm installed
+ A MongoDB Atlas account
+ A MongoDB Compass account
 
-It connects to a MongoDB database using the Mongoose library and the connection string mongodb+srv://siddu:Siddu%40123@cluster0.gjp169q.mongodb.net/DemoAuth?retryWrites=true&w=majority
+Setup
 
-It also enables session handling for the application, with the session being stored in the same MongoDB database that the app is connected to.
+1. Clone the repository and navigate to the folder
+2. Run npm install to install the dependencies
+3. Create a new MongoDB cluster on MongoDB Atlas and connect to it using MongoDB Compass
+4. Replace the MongoDB URL in app.js with the URL of your cluster
+5. Run the server with the command node app.js
+6. Open your browser and go to https://demo-auth-production.up.railway.app/signup to sign up for a new account
+7. Go to https://demo-auth-production.up.railway.app/login to log in to your account
+8. Go to https://demo-auth-production.up.railway.app/ to see your username displayed if you're logged in
 
-It sets the views directory to the views folder and set the view engine to ejs.
+Code Explanation
 
-It use body-parser middleware to parse incoming request bodies in a middleware before the handlers, available under the req.body property.
+The app.js file is the main file of the application. It sets up the express server and connects to the MongoDB cluster using Mongoose.
+The signup route is used to create a new user by saving their information to the database.
+The login route is used to log in an existing user by checking their email and password against the information stored in the database.
+The / route is used to check if a user is logged in and display their username.
+session are used to store the user's information during the session.
+MongoStore is used to store the session information in MongoDB, so it persists across multiple requests.
+userSchema is used to define the structure of the user data that will be stored in the database.
+The User model is created using the userSchema and is used to interact with the users collection in the MongoDB database.
 
-Then it define a user schema and create a model from the schema.
+Conclusion
 
-Next, it sets up routing for the application, with two main routes: '/signup' and '/login'.
+This example provides a basic understanding of how to create an authentication system using Express.js, MongoDB, and Mongoose. It can be easily extended to include additional features such as password hashing and email verification.
 
-The '/signup' route renders the signup page and handles the post request for the signup form. It takes the data from the form and saves it to the database.
 
-The '/login' route renders the login page and handles the post request for the login form. It takes the email and password from the form and check for the user in the database and if the user is present and the password matches it redirects to home page.
-
-The '/' route is protected route, which means that only logged in users can access it. It finds the user in the database with the current session's userId and if the user is present it sends the username of the user else redirects to login page.
 
